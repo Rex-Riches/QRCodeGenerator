@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Generated</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f9fbff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        h1 {
+            color: #1f3a5f;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #444;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .qr-image {
+            display: block;
+            margin: 20px auto;
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .link-box {
+            background: #f4f7fb;
+            border: 1px solid #d7e0ea;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+            color: #1f3a5f;
+            font-size: 14px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            background: #1f3a5f;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+
+        .back-link:hover {
+            background: #17314d;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>QR Code Generated</h1>
+        <p>Your secure QR code is ready.</p>
+
+        <p><strong>Title:</strong> <span th:text="${title}"></span></p>
+
+        <img th:src="@{${qrImagePath}}" alt="QR Code" class="qr-image">
+
+        <p><strong>Access URL:</strong></p>
+        <div class="link-box" th:text="${accessLink}"></div>
+
+        <a th:href="@{/}" class="back-link">Create Another</a>
+    </div>
+</div>
+</body>
+</html>

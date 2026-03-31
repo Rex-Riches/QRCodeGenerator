@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Not Found</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f9fbff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        h1 {
+            color: #b22222;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-block;
+            text-decoration: none;
+            background: #1f3a5f;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+        }
+
+        .back-link:hover {
+            background: #17314d;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>QR Link Not Found</h1>
+        <p>The QR code or access token does not exist.</p>
+        <a th:href="@{/}" class="back-link">Go Home</a>
+    </div>
+</div>
+</body>
+</html>
