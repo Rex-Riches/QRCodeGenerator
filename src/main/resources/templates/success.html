@@ -66,19 +66,23 @@
             margin: 15px 0;
             color: #1f3a5f;
             font-size: 14px;
+            word-break: break-word;
         }
 
-        .back-link {
+        .btn {
             display: inline-block;
-            margin-top: 15px;
+            margin: 10px 8px 0;
             text-decoration: none;
             background: #1f3a5f;
             color: white;
             padding: 12px 20px;
             border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
         }
 
-        .back-link:hover {
+        .btn:hover {
             background: #17314d;
         }
     </style>
@@ -88,12 +92,16 @@
     <div class="card">
         <h1>QR Code Generated</h1>
         <p>Your secure QR code is ready.</p>
+
         <p><strong>Title:</strong> <span th:text="${title}"></span></p>
+
         <img th:src="'data:image/png;base64,' + ${qrCodeBase64}" alt="QR Code" class="qr-image">
+
         <p><strong>Access URL:</strong></p>
         <div class="link-box" th:text="${accessLink}"></div>
 
-        <a th:href="@{/}" class="back-link">Create Another</a>
+        <a th:href="@{'/download/' + ${token}}" class="btn">Download QR Code</a>
+        <a th:href="@{/}" class="btn">Create Another</a>
     </div>
 </div>
 </body>

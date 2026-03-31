@@ -14,6 +14,10 @@ import java.util.Base64;
 public class QrCodeService {
 
     public String generateQrCodeBase64(String text) throws Exception {
+        return Base64.getEncoder().encodeToString(generateQrCodeBytes(text));
+    }
+
+    public byte[] generateQrCodeBytes(String text) throws Exception {
         int width = 300;
         int height = 300;
 
@@ -28,10 +32,9 @@ public class QrCodeService {
             }
         }
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "PNG", baos);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", outputStream);
 
-        byte[] imageBytes = baos.toByteArray();
-        return Base64.getEncoder().encodeToString(imageBytes);
+        return outputStream.toByteArray();
     }
 }
