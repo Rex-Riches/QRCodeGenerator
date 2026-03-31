@@ -88,11 +88,8 @@
     <div class="card">
         <h1>QR Code Generated</h1>
         <p>Your secure QR code is ready.</p>
-
         <p><strong>Title:</strong> <span th:text="${title}"></span></p>
-
-        <img th:src="@{${qrImagePath}}" alt="QR Code" class="qr-image">
-
+        <img th:src="'data:image/png;base64,' + ${qrCodeBase64}" alt="QR Code" class="qr-image">
         <p><strong>Access URL:</strong></p>
         <div class="link-box" th:text="${accessLink}"></div>
 

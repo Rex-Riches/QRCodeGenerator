@@ -7,15 +7,13 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
 
 @Service
 public class QrCodeService {
 
-    public String generateQrCode(String text, String fileName) throws Exception {
+    public String generateQrCodeBase64(String text) throws Exception {
         int width = 300;
         int height = 300;
 
@@ -30,12 +28,10 @@ public class QrCodeService {
             }
         }
 
-        Path folder = Paths.get("src/main/resources/static/qrcodes");
-        Files.createDirectories(folder);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "PNG", baos);
 
-        String filePath = "src/main/resources/static/qrcodes/" + fileName + ".png";
-        ImageIO.write(image, "PNG", new File(filePath));
-
-        return "/qrcodes/" + fileName + ".png";
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.getEncoder().encodeToString(imageBytes);
     }
 }

@@ -1,6 +1,7 @@
 package com.rex.SecureQRCodeGenerator.service;
 
 
+
 import com.rex.SecureQRCodeGenerator.entity.SecureLink;
 import com.rex.SecureQRCodeGenerator.repository.SecureLinkRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,29 +15,22 @@ import java.util.Optional;
 public class SecureLinkService {
 
     private final SecureLinkRepository repository;
-    private final QrCodeService qrCodeService;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public SecureLinkService(SecureLinkRepository repository,
-                             QrCodeService qrCodeService,
                              BCryptPasswordEncoder passwordEncoder) {
         this.repository = repository;
-        this.qrCodeService = qrCodeService;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public SecureLink createSecureLink(String title, String originalUrl, String rawPassword, String baseUrl) throws Exception {
+    public SecureLink createSecureLink(String title, String originalUrl, String rawPassword) {
         String token = generateToken();
-        String accessUrl = baseUrl + "/access/" + token;
 
         SecureLink link = new SecureLink();
         link.setTitle(title);
         link.setOriginalUrl(originalUrl);
         link.setToken(token);
         link.setPasswordHash(passwordEncoder.encode(rawPassword));
-
-        String qrPath = qrCodeService.generateQrCode(accessUrl, token);
-        link.setQrImagePath(qrPath);
 
         return repository.save(link);
     }
